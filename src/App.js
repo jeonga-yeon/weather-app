@@ -10,6 +10,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
+  const [clickCurrent, setClickCurrent] = useState(false);
   const cities = ["seoul", "busan", "new york", "paris"];
 
   useEffect(() => {
@@ -61,7 +62,14 @@ function App() {
       ) : (
         <div className="container">
           <WeatherBox weather={weather} />
-          <WeatherButton cities={cities} setCity={setCity} />
+          <WeatherButton
+            cities={cities}
+            setCity={setCity}
+            current={getCurrentLocation}
+            clickedCity={city}
+            clickedCurrent={clickCurrent}
+            setClickCurrent={setClickCurrent}
+          />
         </div>
       )}
     </div>
