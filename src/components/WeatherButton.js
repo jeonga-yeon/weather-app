@@ -1,34 +1,22 @@
 /* eslint-disable no-use-before-define */
 import { Button } from "react-bootstrap";
 
-const WeatherButton = ({
-  cities,
-  setCity,
-  current,
-  clickedCity,
-  clickedCurrent,
-  setClickCurrent,
-}) => {
+const WeatherButton = ({ cities, changeCity, selectedCity }) => {
   return (
     <div>
       <Button
-        variant={clickedCurrent ? "info" : "warning"}
-        onClick={() => {
-          current();
-          setClickCurrent(true);
-          setCity("");
-        }}
+        className="weather-button"
+        variant={`${selectedCity === "" ? "info" : "warning"}`}
+        onClick={() => changeCity("current")}
       >
         내 위치
       </Button>
       {cities.map((city, index) => (
         <Button
-          variant={clickedCity === city ? "info" : "warning"}
+          className="weather-button"
+          variant={`${selectedCity === city ? "info" : "warning"}`}
           key={index}
-          onClick={() => {
-            setCity(city);
-            setClickCurrent(false);
-          }}
+          onClick={() => changeCity(city)}
         >
           {city}
         </Button>

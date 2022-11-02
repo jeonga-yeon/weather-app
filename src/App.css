@@ -14,7 +14,18 @@ body {
 
 .weather-box {
   border: 3px solid white;
-  padding: 50px;
+  padding: 70px;
   border-radius: 30px;
   background-color: azure;
+  margin-bottom: 10px;
+  color: #54a0ff;
+}
+
+.weather-box__desc {
+  color: black;
+}
+
+.weather-button {
+  margin-right: 5px;
+  color: white;
 }

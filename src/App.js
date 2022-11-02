@@ -10,24 +10,30 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
-  const [clickCurrent, setClickCurrent] = useState(false);
+  const [apiError, setAPIError] = useState(null);
   const cities = ["seoul", "busan", "new york", "paris"];
 
   useEffect(() => {
     if (city === "") {
+      setLoading(true);
       getCurrentLocation();
     } else {
+      setLoading(true);
       getWeatherByCity();
     }
   }, [city]);
 
   const getWeatherByCity = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
-    setLoading(true);
-    const response = await fetch(url);
-    const data = await response.json();
-    setWeather(data);
-    setLoading(false);
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setWeather(data);
+      setLoading(false);
+    } catch (error) {
+      setAPIError(error.message);
+      setLoading(false);
+    }
   };
 
   const getCurrentLocation = () => {
@@ -39,12 +45,24 @@ function App() {
   };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
-    setLoading(true);
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-    setLoading(false);
+    try {
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setLoading(false);
+    } catch (error) {
+      setAPIError(error.message);
+      setLoading(false);
+    }
+  };
+
+  const changeCity = (city) => {
+    if (city === "current") {
+      setCity("");
+    } else {
+      setCity(city);
+    }
   };
 
   return (
@@ -59,18 +77,17 @@ function App() {
             data-testid="loader"
           />
         </div>
-      ) : (
+      ) : !apiError ? (
         <div className="container">
           <WeatherBox weather={weather} />
           <WeatherButton
             cities={cities}
-            setCity={setCity}
-            current={getCurrentLocation}
-            clickedCity={city}
-            clickedCurrent={clickCurrent}
-            setClickCurrent={setClickCurrent}
+            changeCity={changeCity}
+            selectedCity={city}
           />
         </div>
+      ) : (
+        apiError
       )}
     </div>
   );
