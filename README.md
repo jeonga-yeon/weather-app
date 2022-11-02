@@ -1,4 +1,4 @@
-# Kanban ToDo-List
+# Weather App
 
 현재 위치와 주요 도시별 현재 날씨를 알 수 있는 웹 사이트  
 https://joyfuldev.github.io/weather-app/
