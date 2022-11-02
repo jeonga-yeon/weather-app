@@ -1,12 +1,12 @@
 # Kanban ToDo-List
 
-현재 위치와 주요 도시별 현재 날씨를 알 수 있는 웹 사이트
+현재 위치와 주요 도시별 현재 날씨를 알 수 있는 웹 사이트  
 https://joyfuldev.github.io/weather-app/
 <br />
 <br />
 
 ✅ 현재 위치기반 날씨  
-사용자의 위도 경도 정보를 통해 현재 위치를 파악한 후 api를 통해 날씨를 알려준다.  
+웹 사이트가 실행되면 사용자의 위도 경도 정보를 통해 현재 위치를 파악한 후 api를 통해 날씨를 알려준다.  
 ![weatherapp1](https://user-images.githubusercontent.com/76932302/199442786-acd9301f-dd28-4352-a72e-0af8af8f16b9.png)
 
 <br />
